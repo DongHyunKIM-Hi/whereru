@@ -7,4 +7,5 @@ import org.springframework.stereotype.Service
 @Service
 interface RecordService{
     fun saveRecord(requestRecord: RequestRecord): ResponseRecord
+    fun getRecordList(): List<ResponseRecord>
 }
