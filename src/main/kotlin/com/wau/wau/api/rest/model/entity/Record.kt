@@ -13,6 +13,8 @@ class Record {
     var latitude : Double? = null
     var memo : String ? = null
     var loadAddress : String? = null
+    @Column(length = 10000)
+    var totalImageUrl : String? = null
 
     fun of(requestRecord: RequestRecord) : Record{
         return Record().apply {

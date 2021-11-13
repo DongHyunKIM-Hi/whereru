@@ -4,5 +4,6 @@ data class FileUploadResponse(
     var originName: String,
     var imagesPath: String,
     var userId : String,
-    var recordId: Int
+    var recordId: Int,
+    var imageUrl: String
 )

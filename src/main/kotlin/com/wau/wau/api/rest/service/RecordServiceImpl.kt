@@ -46,6 +46,10 @@ class RecordServiceImpl (
     override fun uploadImages(userId: String, recordId: Int, images: List<MultipartFile>): List<FileUploadResponse> {
         val record: Record = recordRepository.findByIdAndUserId(recordId,userId).orElseThrow { throw NotFoundException("조건에 맞는 아이디랑 기록을 찾을 수 없습니다.") }
         val imageList: List<FileUploadResponse> = images.stream().map { it -> s3Service.upload(it,recordId,userId) }.collect(Collectors.toList())
+        var tmp : String = ""
+        var totalUrl :String = imageList.stream().map { it-> tmp + it.imageUrl + ";;" }.collect(Collectors.joining())
+        record.totalImageUrl = totalUrl;
+        recordRepository.save(record)
         return imageList
     }
 }

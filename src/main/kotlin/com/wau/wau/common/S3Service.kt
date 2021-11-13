@@ -37,12 +37,18 @@ class S3Service {
         val filePath = "$userId/$recordId/$originName"
         s3Client.putObject(PutObjectRequest(bucket,filePath,file.inputStream,null)
             .withCannedAcl(CannedAccessControlList.PublicRead))
+
+
+        val imageUrl = s3Client.getUrl(bucket,filePath).toString();
+
         return FileUploadResponse(
             originName,
             filePath,
             userId,
-            recordId
+            recordId,
+            imageUrl
         )
     }
+
 
 }

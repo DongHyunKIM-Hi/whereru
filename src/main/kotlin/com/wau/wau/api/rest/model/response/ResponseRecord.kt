@@ -9,6 +9,7 @@ data class ResponseRecord(
     var latitude : Double? = null,
     var memo : String?  =  null,
     var loadAddress : String? = null,
+    var totalImageUrl: String? = null
 )
 
 fun of(record: Record): ResponseRecord{
@@ -18,7 +19,8 @@ fun of(record: Record): ResponseRecord{
         record.longitude,
         record.latitude,
         record.memo,
-        record.loadAddress
+        record.loadAddress,
+        record.totalImageUrl
     )
 }
 

@@ -52,4 +52,6 @@ class RecordController(
         val response: List<FileUploadResponse> = recordService.uploadImages(userId,recordId.toInt(), images)
         return ResponseEntity.ok(response)
     }
+
+
 }
