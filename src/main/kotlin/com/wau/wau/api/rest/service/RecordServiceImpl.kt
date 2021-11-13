@@ -5,14 +5,18 @@ import com.wau.wau.api.rest.model.request.RequestRecord
 import com.wau.wau.api.rest.model.response.ResponseRecord
 import com.wau.wau.api.rest.model.response.of
 import com.wau.wau.api.rest.repository.RecordRepository
+import com.wau.wau.common.S3Service
+import com.wau.wau.common.model.response.FileUploadResponse
 import javassist.NotFoundException
 import org.springframework.stereotype.Service
+import org.springframework.web.multipart.MultipartFile
 import java.util.*
 import java.util.stream.Collectors
 
 @Service
 class RecordServiceImpl (
-    private val recordRepository: RecordRepository
+    private val recordRepository: RecordRepository,
+    private val s3Service: S3Service
 ):RecordService{
 
     override fun saveRecord(requestRecord: RequestRecord): ResponseRecord {
@@ -34,9 +38,14 @@ class RecordServiceImpl (
     }
 
     override fun deleteRecord(recordId:Int): Boolean {
-        val record:Record = recordRepository.findById(recordId).orElseThrow { NotFoundException("삭제하려는 아이디를 찾을 수 없습니다.") }
+        val record:Record = recordRepository.findById(recordId).orElseThrow { throw NotFoundException("삭제하려는 아이디를 찾을 수 없습니다.") }
         recordRepository.deleteById(record.id)
         return true
     }
 
+    override fun uploadImages(userId: String, recordId: Int, images: List<MultipartFile>): List<FileUploadResponse> {
+        val record: Record = recordRepository.findByIdAndUserId(recordId,userId).orElseThrow { throw NotFoundException("조건에 맞는 아이디랑 기록을 찾을 수 없습니다.") }
+        val imageList: List<FileUploadResponse> = images.stream().map { it -> s3Service.upload(it,recordId,userId) }.collect(Collectors.toList())
+        return imageList
+    }
 }

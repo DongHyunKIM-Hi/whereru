@@ -9,4 +9,5 @@ import java.util.*
 interface RecordRepository:JpaRepository<Record, Int> {
     override fun findById(recordId: Int): Optional<Record>
     fun findAllByUserId(userId:String):List<Record>
+    fun findByIdAndUserId(recordId: Int,userId: String): Optional<Record>
 }

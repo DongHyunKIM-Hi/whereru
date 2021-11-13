@@ -23,6 +23,8 @@ repositories {
 }
 
 dependencies {
+    // aws
+    implementation("com.amazonaws:aws-java-sdk-s3:1.11.714")
     implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
