@@ -8,4 +8,6 @@ import org.springframework.stereotype.Service
 interface RecordService{
     fun saveRecord(requestRecord: RequestRecord): ResponseRecord
     fun getRecordList(): List<ResponseRecord>
+    fun getRecordByUserIdList(userId:String): List<ResponseRecord>
+    fun deleteRecord(recordId: Int): Boolean
 }

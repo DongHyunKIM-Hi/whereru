@@ -24,4 +24,20 @@ class RecordController(
         val response : List<ResponseRecord> = recordService.getRecordList()
         return ResponseEntity.ok(response)
     }
+
+    @GetMapping("/get/{userId}")
+    fun getRecordByUserId(
+        @PathVariable userId:String
+    ): ResponseEntity<List<ResponseRecord>>{
+        val response: List<ResponseRecord> = recordService.getRecordByUserIdList(userId)
+        return ResponseEntity.ok(response)
+    }
+
+    @DeleteMapping("/delete/{recordId}")
+    fun deleteRecord(
+        @PathVariable recordId: Int
+    ):ResponseEntity<Boolean>{
+        val response: Boolean = recordService.deleteRecord(recordId)
+        return ResponseEntity.ok(response)
+    }
 }
