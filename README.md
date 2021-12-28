@@ -11,7 +11,7 @@
 
 - kotlin + spring 
 - JPA(Hibernate)
-- aws(ec2, rds)
+- aws(, rds)
 - swagger
 
 http://3.35.168.181/swagger-ui.html
